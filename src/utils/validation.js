@@ -80,30 +80,30 @@ export const validateList = ({ list, language, intl }) => {
     maxOneBSB,
   ];
   if (list.compositionRule && list.compositionRule.includes("grand-melee")) {
-    checks.push(makeMaxPointsSingleUnit(.25 * list.points, "characters", "misc.error.grandMelee25"));
-    checks.push(makeMaxPointsSingleUnit(.25 * list.points, "core", "misc.error.grandMelee25"));
-    checks.push(makeMaxPointsSingleUnit(.25 * list.points, "special", "misc.error.grandMelee25"));
-    checks.push(makeMaxPointsSingleUnit(.25 * list.points, "rare", "misc.error.grandMelee25"));
-    checks.push(makeMaxPointsSingleUnit(.25 * list.points, "mercenaries", "misc.error.grandMelee25"));
+    checks.push(createMaxPointsSingleUnit(.25 * list.points, "characters", "misc.error.grandMelee25"));
+    checks.push(createMaxPointsSingleUnit(.25 * list.points, "core", "misc.error.grandMelee25"));
+    checks.push(createMaxPointsSingleUnit(.25 * list.points, "special", "misc.error.grandMelee25"));
+    checks.push(createMaxPointsSingleUnit(.25 * list.points, "rare", "misc.error.grandMelee25"));
+    checks.push(createMaxPointsSingleUnit(.25 * list.points, "mercenaries", "misc.error.grandMelee25"));
     checks.push(grandMeleeWizardLimits);
   }
   if (list.compositionRule && list.compositionRule.includes("combined-arms")) {
     const additionalUnits = Math.max(Math.floor((list.points - 2000) / 1000), 0);
-    checks.push(makeLimitUnitRepeats(3 + additionalUnits, "characters", "misc.error.maxUnits"));
-    checks.push(makeLimitUnitRepeats(4 + additionalUnits, "core", "misc.error.maxUnits"));
-    checks.push(makeLimitUnitRepeats(3 + additionalUnits, "special", "misc.error.maxUnits"));
-    checks.push(makeLimitUnitRepeats(2 + additionalUnits, "rare", "misc.error.maxUnits"));
-    checks.push(makeLimitUnitRepeats(2 + additionalUnits, "mercenaries", "misc.error.maxUnits"));
+    checks.push(createLimitUnitRepeats(3 + additionalUnits, "characters", "misc.error.maxUnits"));
+    checks.push(createLimitUnitRepeats(4 + additionalUnits, "core", "misc.error.maxUnits"));
+    checks.push(createLimitUnitRepeats(3 + additionalUnits, "special", "misc.error.maxUnits"));
+    checks.push(createLimitUnitRepeats(2 + additionalUnits, "rare", "misc.error.maxUnits"));
+    checks.push(createLimitUnitRepeats(2 + additionalUnits, "mercenaries", "misc.error.maxUnits"));
   }
   if (list.compositionRule && list.compositionRule.includes("battle-march")) {
-    checks.push(makeMinNonCharacters(2, ["WB", "Sw"], "misc.error.notEnoughNonCharactersBattleMarch"));
-    checks.push(makeMaxPointsSingleUnit(.25 * list.points, "characters", "misc.error.battleMarch25PercentPerCharacter"));
-    checks.push(makeMaxPointsSingleUnit(.35 * list.points, "core", "misc.error.battleMarch35PercentPerCore"));
-    checks.push(makeMaxPointsSingleUnit(.30 * list.points, "special", "misc.error.battleMarch30PercentPerSpecial"));
-    checks.push(makeMaxPointsSingleUnit(.25 * list.points, "rare", "misc.error.battleMarch25PercentPerRare"));
-    checks.push(makeMaxPointsSingleUnit(.25 * list.points, "mercenaries", "misc.error.battleMarch25PercentPerMercenary"));
+    checks.push(createMinNonCharacters(2, ["WB", "Sw"], "misc.error.notEnoughNonCharactersBattleMarch"));
+    checks.push(createMaxPointsSingleUnit(.25 * list.points, "characters", "misc.error.battleMarch25PercentPerCharacter"));
+    checks.push(createMaxPointsSingleUnit(.35 * list.points, "core", "misc.error.battleMarch35PercentPerCore"));
+    checks.push(createMaxPointsSingleUnit(.30 * list.points, "special", "misc.error.battleMarch30PercentPerSpecial"));
+    checks.push(createMaxPointsSingleUnit(.25 * list.points, "rare", "misc.error.battleMarch25PercentPerRare"));
+    checks.push(createMaxPointsSingleUnit(.25 * list.points, "mercenaries", "misc.error.battleMarch25PercentPerMercenary"));
   } else {
-    checks.push(makeMinNonCharacters(3, ["WM", "WB", "Sw"], "misc.error.notEnoughNonCharacters"));
+    checks.push(createMinNonCharacters(3, ["WM", "WB", "Sw"], "misc.error.notEnoughNonCharacters"));
   }
   if (list?.army === "tomb-kings-of-khemri") {
     checks.push(hierophantChecks);
@@ -537,31 +537,32 @@ const generalLeadership = (list) => {
   const errors = [];
   let highestLeadership = 0;
   const generals = getGenerals(list);
-  if (list?.characters?.length) {
-    list.characters.forEach((unit) => {
-      if (
-        unit.command &&
-        unit.command.find(
-          (command) =>
-            command.name_en === "General" &&
-            (!command.armyComposition ||
-              equalsOrIncludes(command.armyComposition, list.armyComposition)),
-        )
-      ) {
-        const unitName =
-          unit.name_en.includes("renegade") &&
-          list.armyComposition?.includes("renegade")
-            ? unit.name_en
-            : unit.name_en.replace(" {renegade}", "");
-        const leadership = getUnitLeadership(unitName);
 
-        if (leadership && leadership > highestLeadership) {
-          highestLeadership = leadership;
-        }
-      }
-    })
-  }
   if (generals.length === 1) {
+    if (list?.characters?.length) {
+      list.characters.forEach((unit) => {
+        if (
+          unit.command &&
+          unit.command.find(
+            (command) =>
+              command.name_en === "General" &&
+              (!command.armyComposition ||
+                equalsOrIncludes(command.armyComposition, list.armyComposition)),
+          )
+        ) {
+          const unitName =
+            unit.name_en.includes("renegade") &&
+            list.armyComposition?.includes("renegade")
+              ? unit.name_en
+              : unit.name_en.replace(" {renegade}", "");
+          const leadership = getUnitLeadership(unitName);
+
+          if (leadership && leadership > highestLeadership) {
+            highestLeadership = leadership;
+          }
+        }
+      })
+    }
     const unitLeadership = getUnitLeadership(generals[0].name_en);
     if (unitLeadership && unitLeadership < highestLeadership) {
       errors.push({
@@ -578,9 +579,8 @@ const generalLeadership = (list) => {
  */
 const maxOneBSB = (list) => {
   const errors = [];
-  const BSBs = !list.characters?.length
-    ? []
-    : list.characters.filter(
+  const BSBs = list.characters?.length
+    ? list.characters.filter(
         (unit) =>
           unit.command &&
           unit.command.find(
@@ -588,7 +588,8 @@ const maxOneBSB = (list) => {
               command.active &&
               command.name_en.includes("Battle Standard Bearer"),
           ),
-      );
+      )
+    : [];
   if (BSBs.length > 1) {
     errors.push({
       message: "misc.error.multipleBSBs",
@@ -666,7 +667,7 @@ const hierophantChecks = (list) => {
 
 const generalIsWizard = (list) => {
   const errors = [];
-  const generals = getGenerals(list) || [];
+  const generals = getGenerals(list);
   if (generals.length === 1) {
     if (getWizardLevels(generals[0]).lastIndexOf(1) < 0) {
       errors.push({
@@ -679,10 +680,10 @@ const generalIsWizard = (list) => {
 }
 
 /**
- * Creates a function that checks whether the army list has a minimum number
+ * Factory function for creating validation for whether the army list has a minimum number
  * of non-character units who aren't war machines, swarms, or war beasts.
  */
-function makeMinNonCharacters(minNum, notCountedTypes, errorMsg) {
+function createMinNonCharacters(minNum, notCountedTypes, errorMsg) {
   return (list) => {
     const allUnits = [
       ...(list.core || []),
@@ -711,10 +712,10 @@ function makeMinNonCharacters(minNum, notCountedTypes, errorMsg) {
 }
 
 /**
- * Creates a function that checks an army for if a single unit in the
+ * Factory function for creating checks for if a single unit in the
  * target category exceeds a given point value.
  */
-function makeMaxPointsSingleUnit(maxPoints, unitCategory, errorMsg) {
+function createMaxPointsSingleUnit(maxPoints, unitCategory, errorMsg) {
   return (list) => {
     const errors = [];
     list[unitCategory] &&
@@ -751,32 +752,23 @@ const grandMeleeWizardLimits = (list) => {
 
   list?.characters &&
     list.characters.forEach((unit) => {
-      let characterWizard = getWizardLevels(unit);
-      characterWizard.forEach((numberAtThisLevel, level) => {
-        if (numberAtThisLevel > 0) {
-          characterWizards[level] += numberAtThisLevel;
-          totalWizards[level] += numberAtThisLevel;
-        }
+      getWizardLevels(unit).forEach((numberAtThisLevel, level) => {
+        characterWizards[level] += numberAtThisLevel;
+        totalWizards[level] += numberAtThisLevel;
       });
     });
   list?.special &&
     list.special.forEach((unit) => {
-      let specialWizard = getWizardLevels(unit);
-      specialWizard.forEach((numberAtThisLevel, level) => {
-        if (numberAtThisLevel > 0) {
-          specialWizards[level] += numberAtThisLevel;
-          totalWizards[level] += numberAtThisLevel;
-        }
+      getWizardLevels(unit).forEach((numberAtThisLevel, level) => {
+        specialWizards[level] += numberAtThisLevel;
+        totalWizards[level] += numberAtThisLevel;
       });
     });
   list?.rare &&
     list.rare.forEach((unit) => {
-      let rareWizard = getWizardLevels(unit);
-      rareWizard.forEach((numberAtThisLevel, level) => {
-        if (numberAtThisLevel > 0) {
-          rareWizards[level] += numberAtThisLevel;
-          totalWizards[level] += numberAtThisLevel;
-        }
+      getWizardLevels(unit).forEach((numberAtThisLevel, level) => {
+        rareWizards[level] += numberAtThisLevel;
+        totalWizards[level] += numberAtThisLevel;
       });
     });
   if (totalWizards[4] > level4Max) {
@@ -823,10 +815,10 @@ const grandMeleeWizardLimits = (list) => {
 }
 
 /**
- * Creates a function that checks for duplicate units up to a given number
+ * Factory function for creating checks for duplicate units up to a given number
  * in a target category
  */
-function makeLimitUnitRepeats(max, unitCategory, errorMsg) {
+function createLimitUnitRepeats(max, unitCategory, errorMsg) {
   return (list, language) => {
     const errors = [];
     const restrictedUnits = [];
