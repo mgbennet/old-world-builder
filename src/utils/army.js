@@ -112,3 +112,17 @@ export const getArmyData = ({ data, armyComposition }) => {
     allies: updateIds(data.allies),
   };
 };
+
+/**
+ * Gets all characters with the General command option active
+ */
+export const getGenerals = (list) =>
+  list?.characters?.length
+    ? list.characters.filter(
+        (unit) =>
+          unit.command &&
+          unit.command.find(
+            (command) => command.active && command.name_en === "General",
+          ),
+      )
+    : [];

@@ -4159,3 +4159,11 @@ export const getMinPercentData = ({
     diff: points <= minPoints ? Math.ceil(minPoints - points) : 0,
   };
 };
+
+/**
+ * Gets the limitations and requirements for units in a specified army composition and category
+ */
+export const getUnitRulesByCategory = (armyComp, category) => 
+  rules[armyComp]
+    ? (rules[armyComp][category]?.units || [])
+    : (rules["grand-army"][category]?.units || []);
