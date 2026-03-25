@@ -19,6 +19,7 @@ import { getRandomId } from "../../utils/id";
 import { useLanguage } from "../../utils/useLanguage";
 import { getArmyData } from "../../utils/army";
 import { fetcher } from "../../utils/fetcher";
+import { getUnitPoints } from "../../utils/points";
 import { getGameSystems, getCustomDatasetData } from "../../utils/game-systems";
 
 import { nameMap } from "../magic";
@@ -81,9 +82,9 @@ export const Add = ({ isMobile }) => {
             : null}
           <b>{getUnitName({ unit, language })}</b>
         </span>
-        <i className="unit__points">{`${
-          unit.minimum ? unit.points * unit.minimum : unit.points
-        } ${intl.formatMessage({
+        <i className="unit__points">{`${getUnitPoints(unit, {
+          armyComposition: unit.armyComposition,
+        })} ${intl.formatMessage({
           id: "app.points",
         })}`}</i>
       </button>
@@ -257,7 +258,6 @@ export const Add = ({ isMobile }) => {
           }
         });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [list, army, allies, type]);
 
   if (redirect) {
