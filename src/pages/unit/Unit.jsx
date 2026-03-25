@@ -671,7 +671,7 @@ export const Unit = ({ isMobile, previewData = {} }) => {
             {notes[`name_${language}`] || notes.name_en}
           </p>
         ) : null}
-        {stats && (
+        {stats.length > 0 && (
           <Stats
             values={stats}
             className={classNames(
