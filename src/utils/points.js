@@ -231,16 +231,17 @@ export const getUnitPoints = (unit, settings) => {
 
 const getMagicItemPoints = ({ item, unit }) => {
   let unitPoints = 0;
+  const isCharacter = unit.type === "characters" || (!!unit.unitType && unit.unitType === "characters");
 
   // Units with points per model
-  if (unit.type !== "characters" && item.perModel) {
+  if (!isCharacter && item.perModel) {
     unitPoints +=
       (unit.strength || 1) *
       (item.amount ? item.amount * item.perModelPoints : item.perModelPoints);
   }
 
   // Units with points per unit
-  else if (unit.type !== "characters" && item.perUnitPoints) {
+  else if (!isCharacter && item.perUnitPoints) {
     unitPoints += item.amount
       ? item.amount * item.perUnitPoints
       : item.perUnitPoints;
