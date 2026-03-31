@@ -7,6 +7,7 @@ import {
   createLimitUnitRepeats,
   createMaxPointsSingleUnit,
   createMinNonCharacters,
+  generalIsHierophant,
   generalIsWizard,
   generalLeadership,
   grandMeleeWizardLimits,
@@ -51,6 +52,9 @@ export const validateList = ({ list, language, intl }) => {
   }
   if (list?.army === "tomb-kings-of-khemri") {
     checks.push(hierophantChecks);
+    if (list.armyComposition === "mortuary-cults") {
+      checks.push(generalIsHierophant);
+    }
   }
   if (list?.army === "vampire-counts") {
     checks.push(generalIsWizard);

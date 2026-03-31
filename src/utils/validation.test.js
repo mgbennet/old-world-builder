@@ -757,6 +757,62 @@ describe("validateList", () => {
     expect(getMessages(errors)).toEqual(["misc.error.hierophantLevel"]);
   });
 
+  test("applies Language of the Priests special hierophant priority level", () => {
+    const list = {
+      ...baseList,
+      army: "tomb-kings-of-khemri",
+      characters: [
+        makeCharacter({
+          id: "tomb-king.1",
+          name_en: "Settra the Imperishable",
+          command: [{ name_en: "The Hierophant", active: false, points: 0 }],
+          options: [{ name_en: "Arise!, Level 1 Wizard", active: true }],
+          isGeneral: true,
+        }),
+        makeCharacter({
+          id: "high-priest.1",
+          name_en: "High Priest",
+          command: [{ name_en: "The Hierophant", active: true, points: 0 }],
+          options: [{ name_en: "Level 4 Wizard", active: true }],
+        }),
+      ],
+    };
+
+    const errors = validateList({ list, language: "en", intl });
+    expect(getMessages(errors)).toEqual(["misc.error.hierophantLevel"]);
+  });
+
+  test("adds hierophantGeneral if a Mortuary Cult general is not the Hierophant", () => {
+    const list = {
+      ...baseList,
+      army: "tomb-kings-of-khemri",
+      armyComposition: "mortuary-cults",
+      characters: [
+        makeCharacter({
+          id: "high-priest.1",
+          name_en: "High Priest",
+          command: [{ name_en: "The Hierophant", active: false, points: 0 }],
+          options: [{ name_en: "Level 3 Wizard", active: true }],
+          isGeneral: true
+        }),
+        makeCharacter({
+          id: "high-priest.2",
+          name_en: "High Priest",
+          command: [{ name_en: "The Hierophant", active: true, points: 0 }],
+          options: [{ name_en: "Level 4 Wizard", active: true }],
+          isGeneral: false,
+        }),
+      ],
+      special: [
+        {id: "tomb-scorpion.1", name_en:"Tomb Scorpion"},
+        {id: "tomb-scorpion.2", name_en:"Tomb Scorpion"},
+      ]
+    };
+
+    const errors = validateList({ list, language: "en", intl });
+    expect(getMessages(errors)).toEqual(["misc.error.hierophantGeneral"]);
+  });
+
   test("adds wizardGeneral if a Vampire Count general is not a wizard", () => {
     const list = {
       ...baseList,

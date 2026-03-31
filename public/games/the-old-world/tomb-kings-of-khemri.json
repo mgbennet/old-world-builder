@@ -19,6 +19,25 @@
           "name_es": "General",
           "points": 0,
           "armyComposition": ["tomb-kings-of-khemri", "nehekharan-royal-hosts"]
+        },
+        {
+          "name_en": "The Hierophant",
+          "name_cn": "The Hierophant",
+          "name_it": "The Hierophant",
+          "name_de": "The Hierophant",
+          "name_fr": "The Hierophant",
+          "name_es": "The Hierophant",
+          "points": 0,
+          "exclusive": false,
+          "notes": {
+            "name_en": "Must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests",
+            "name_cn": "Must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests",
+            "name_de": "Must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests",
+            "name_es": "Must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests",
+            "name_fr": "Must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests",
+            "name_it": "Must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests"
+          },
+          "armyComposition": ["nehekharan-royal-hosts"]
         }
       ],
       "equipment": [
@@ -114,6 +133,14 @@
           "name_de": "Erhebt euch!, Level 1 Zauberer",
           "name_fr": "Levez-vous!, Sorcier de Niveau 1",
           "points": 35,
+          "notes": {
+            "name_en": "Must be General and Hierophant",
+            "name_cn": "Must be General and Hierophant",
+            "name_de": "Must be General and Hierophant",
+            "name_es": "Must be General and Hierophant",
+            "name_fr": "Must be General and Hierophant",
+            "name_it": "Must be General and Hierophant"
+          },
           "armyComposition": "nehekharan-royal-hosts"
         }
       ],
@@ -236,7 +263,7 @@
           }
         }
       ],
-      "lores": [],
+      "lores": ["necromancy"],
       "specialRules": {
         "name_en": "Curse of the Necropolis, Dry as Dust, Flammable, Indomitable (2), Khopesh, My Will Be Done, Nehekharan Undead, Regeneration (5+)",
         "name_cn": "墓地诅咒, 干枯如尘, 易燃, 顽强不屈(2), 霍佩什, 吾愿必达, 尼赫喀拉亡灵, 重生(5+)",
@@ -300,6 +327,25 @@
           "name_es": "General",
           "points": 0,
           "armyComposition": ["tomb-kings-of-khemri", "nehekharan-royal-hosts"]
+        },
+        {
+          "name_en": "The Hierophant",
+          "name_cn": "The Hierophant",
+          "name_it": "The Hierophant",
+          "name_de": "The Hierophant",
+          "name_fr": "The Hierophant",
+          "name_es": "The Hierophant",
+          "points": 0,
+          "exclusive": false,
+          "notes": {
+            "name_en": "General must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests",
+            "name_cn": "General must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests",
+            "name_de": "General must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests",
+            "name_es": "General must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests",
+            "name_fr": "General must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests",
+            "name_it": "General must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests"
+          },
+          "armyComposition": ["nehekharan-royal-hosts"]
         }
       ],
       "equipment": [
@@ -395,6 +441,14 @@
           "name_de": "Erhebt euch!, Level 1 Zauberer",
           "name_fr": "Levez-vous!, Sorcier de Niveau 1",
           "points": 35,
+          "notes": {
+            "name_en": "Must be General and Hierophant",
+            "name_cn": "Must be General and Hierophant",
+            "name_de": "Must be General and Hierophant",
+            "name_es": "Must be General and Hierophant",
+            "name_fr": "Must be General and Hierophant",
+            "name_it": "Must be General and Hierophant"
+          },
           "armyComposition": "nehekharan-royal-hosts"
         }
       ],
@@ -467,7 +521,7 @@
           }
         }
       ],
-      "lores": [],
+      "lores": ["necromancy"],
       "specialRules": {
         "name_en": "Curse of the Necropolis, Dry as Dust, Flammable, Indomitable (2), Khopesh, My Will Be Done, Nehekharan Undead, Regeneration (5+)",
         "name_cn": "墓地诅咒, 干枯如尘, 易燃, 顽强不屈(2), 霍佩什, 吾愿必达, 尼赫喀拉亡灵, 重生(5+)",
