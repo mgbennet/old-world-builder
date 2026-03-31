@@ -135,22 +135,25 @@ export const hierophantChecks = (list) => {
                 equalsOrIncludes(command.armyComposition, list.armyComposition)),
           )
         ) {
-          const wizardLevel = getWizardLevels(unit).lastIndexOf(1);
+          // Settra and characters with the "Language of the Priests" option are always the Hierophant
+          const hasLanguageOfThePriests = (unit.name_en === "Tomb King" || unit.name_en === "Tomb Prince") &&
+            unit.command[0].options?.find(
+              (option) => option.name_en === "Arise!, Level 1 Wizard" && option.active
+            ) !== undefined;
+          const wizardLevel = (unit.name_en === "Settra the Imperishable" || hasLanguageOfThePriests) 
+            ? 6 
+            : getWizardLevels(unit).lastIndexOf(1);
           if (wizardLevel && wizardLevel > highestLichePriestLevel) {
-            // Settra and characters with the "Language of the Priests" option are always the Hierophant
-            const hasLanguageOfThePriests = (unit.name_en === "Tomb King" || unit.name_en === "Tomb Prince") &&
-              unit.options.find((option) => option.name_en === "Arise!, Level 1 Wizard") !== undefined;
-            highestLichePriestLevel =
-              (unit.name_en === "Settra the Imperishable" || hasLanguageOfThePriests) 
-                ? 6 
-                : wizardLevel;
+            highestLichePriestLevel = wizardLevel;
           }
         }
       });
     }
     
     const hasLanguageOfThePriests = (hierophants[0].name_en === "Tomb King" || hierophants[0].name_en === "Tomb Prince") &&
-      hierophants[0].options.find((option) => option.name_en === "Arise!, Level 1 Wizard") !== undefined;
+      hierophants[0].command[0].options?.find(
+        (option) => option.name_en === "Arise!, Level 1 Wizard" && option.active
+      ) !== undefined;
     const hierophantLevel =
       (hierophants[0].name_en === "Settra the Imperishable" || hasLanguageOfThePriests)
         ? 6

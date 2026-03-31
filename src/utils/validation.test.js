@@ -765,8 +765,12 @@ describe("validateList", () => {
         makeCharacter({
           id: "tomb-king.1",
           name_en: "Settra the Imperishable",
-          command: [{ name_en: "The Hierophant", active: false, points: 0 }],
-          options: [{ name_en: "Arise!, Level 1 Wizard", active: true }],
+          command: [
+            { name_en: "General", active: true, points: 0, options: [
+              { name_en: "Arise!, Level 1 Wizard", active: true }
+            ] },
+            { name_en: "The Hierophant", active: false, points: 0 }
+          ],
           isGeneral: true,
         }),
         makeCharacter({

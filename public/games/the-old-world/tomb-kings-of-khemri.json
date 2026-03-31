@@ -18,7 +18,26 @@
           "name_fr": "Général",
           "name_es": "General",
           "points": 0,
-          "armyComposition": ["tomb-kings-of-khemri", "nehekharan-royal-hosts"]
+          "armyComposition": ["tomb-kings-of-khemri", "nehekharan-royal-hosts"],
+          "options": [
+            {
+              "name_en": "Arise!, Level 1 Wizard",
+              "name_cn": "唤醒!, 1级法师",
+              "name_it": "Risorgi!, Mago di 1° Livello",
+              "name_de": "Erhebt euch!, Level 1 Zauberer",
+              "name_fr": "Levez-vous!, Sorcier de Niveau 1",
+              "points": 35,
+              "notes": {
+                "name_en": "Must be Hierophant",
+                "name_cn": "Must be Hierophant",
+                "name_de": "Must be Hierophant",
+                "name_es": "Must be Hierophant",
+                "name_fr": "Must be Hierophant",
+                "name_it": "Must be Hierophant"
+              },
+              "armyComposition": "nehekharan-royal-hosts"
+            }
+          ]
         },
         {
           "name_en": "The Hierophant",
@@ -30,12 +49,12 @@
           "points": 0,
           "exclusive": false,
           "notes": {
-            "name_en": "Must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests",
-            "name_cn": "Must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests",
-            "name_de": "Must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests",
-            "name_es": "Must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests",
-            "name_fr": "Must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests",
-            "name_it": "Must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests"
+            "name_en": "Only available to General if given Arise and Level 1 Wizard",
+            "name_cn": "Only available to General if given Arise and Level 1 Wizard",
+            "name_de": "Only available to General if given Arise and Level 1 Wizard",
+            "name_es": "Only available to General if given Arise and Level 1 Wizard",
+            "name_fr": "Only available to General if given Arise and Level 1 Wizard",
+            "name_it": "Only available to General if given Arise and Level 1 Wizard"
           },
           "armyComposition": ["nehekharan-royal-hosts"]
         }
@@ -125,23 +144,6 @@
           "name_fr": "Bouclier",
           "points": 2,
           "perModel": true
-        },
-        {
-          "name_en": "Arise!, Level 1 Wizard",
-          "name_cn": "唤醒!, 1级法师",
-          "name_it": "Risorgi!, Mago di 1° Livello",
-          "name_de": "Erhebt euch!, Level 1 Zauberer",
-          "name_fr": "Levez-vous!, Sorcier de Niveau 1",
-          "points": 35,
-          "notes": {
-            "name_en": "Must be General and Hierophant",
-            "name_cn": "Must be General and Hierophant",
-            "name_de": "Must be General and Hierophant",
-            "name_es": "Must be General and Hierophant",
-            "name_fr": "Must be General and Hierophant",
-            "name_it": "Must be General and Hierophant"
-          },
-          "armyComposition": "nehekharan-royal-hosts"
         }
       ],
       "mounts": [
@@ -326,7 +328,26 @@
           "name_fr": "Général",
           "name_es": "General",
           "points": 0,
-          "armyComposition": ["tomb-kings-of-khemri", "nehekharan-royal-hosts"]
+          "armyComposition": ["tomb-kings-of-khemri", "nehekharan-royal-hosts"],
+          "options": [
+            {
+              "name_en": "Arise!, Level 1 Wizard",
+              "name_cn": "唤醒!, 1级法师",
+              "name_it": "Risorgi!, Mago di 1° Livello",
+              "name_de": "Erhebt euch!, Level 1 Zauberer",
+              "name_fr": "Levez-vous!, Sorcier de Niveau 1",
+              "points": 35,
+              "notes": {
+                "name_en": "Must be Hierophant",
+                "name_cn": "Must be Hierophant",
+                "name_de": "Must be Hierophant",
+                "name_es": "Must be Hierophant",
+                "name_fr": "Must be Hierophant",
+                "name_it": "Must be Hierophant"
+              },
+              "armyComposition": "nehekharan-royal-hosts"
+            }
+          ]
         },
         {
           "name_en": "The Hierophant",
@@ -338,12 +359,12 @@
           "points": 0,
           "exclusive": false,
           "notes": {
-            "name_en": "General must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests",
-            "name_cn": "General must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests",
-            "name_de": "General must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests",
-            "name_es": "General must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests",
-            "name_fr": "General must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests",
-            "name_it": "General must be Hierophant if given Arise and Level 1 Wizard with the Language of the Priests"
+            "name_en": "Only available to General if given Arise and Level 1 Wizard",
+            "name_cn": "Only available to General if given Arise and Level 1 Wizard",
+            "name_de": "Only available to General if given Arise and Level 1 Wizard",
+            "name_es": "Only available to General if given Arise and Level 1 Wizard",
+            "name_fr": "Only available to General if given Arise and Level 1 Wizard",
+            "name_it": "Only available to General if given Arise and Level 1 Wizard"
           },
           "armyComposition": ["nehekharan-royal-hosts"]
         }
@@ -433,23 +454,6 @@
           "name_fr": "Bouclier",
           "points": 2,
           "perModel": true
-        },
-        {
-          "name_en": "Arise!, Level 1 Wizard",
-          "name_cn": "唤醒!, 1级法师",
-          "name_it": "Risorgi!, Mago di 1° Livello",
-          "name_de": "Erhebt euch!, Level 1 Zauberer",
-          "name_fr": "Levez-vous!, Sorcier de Niveau 1",
-          "points": 35,
-          "notes": {
-            "name_en": "Must be General and Hierophant",
-            "name_cn": "Must be General and Hierophant",
-            "name_de": "Must be General and Hierophant",
-            "name_es": "Must be General and Hierophant",
-            "name_fr": "Must be General and Hierophant",
-            "name_it": "Must be General and Hierophant"
-          },
-          "armyComposition": "nehekharan-royal-hosts"
         }
       ],
       "mounts": [
