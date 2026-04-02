@@ -135,20 +135,29 @@ export const hierophantChecks = (list) => {
                 equalsOrIncludes(command.armyComposition, list.armyComposition)),
           )
         ) {
-          const wizardLevel = getWizardLevels(unit).lastIndexOf(1);
+          // Settra and characters with the "Language of the Priests" option are always the Hierophant
+          const hasLanguageOfThePriests = (unit.name_en === "Tomb King" || unit.name_en === "Tomb Prince") &&
+            unit.command[0].options?.find(
+              (option) => option.name_en === "Arise!, Level 1 Wizard" && option.active
+            ) !== undefined;
+          const wizardLevel = (unit.name_en === "Settra the Imperishable" || hasLanguageOfThePriests) 
+            ? 6 
+            : getWizardLevels(unit).lastIndexOf(1);
           if (wizardLevel && wizardLevel > highestLichePriestLevel) {
-            // Settra is always the Hierophant
-            highestLichePriestLevel =
-              unit.name_en === "Settra the Imperishable" ? 6 : wizardLevel;
+            highestLichePriestLevel = wizardLevel;
           }
         }
       });
     }
-
+    
+    const hasLanguageOfThePriests = (hierophants[0].name_en === "Tomb King" || hierophants[0].name_en === "Tomb Prince") &&
+      hierophants[0].command[0].options?.find(
+        (option) => option.name_en === "Arise!, Level 1 Wizard" && option.active
+      ) !== undefined;
     const hierophantLevel =
-      (hierophants[0].name_en === "Settra the Imperishable"
+      (hierophants[0].name_en === "Settra the Imperishable" || hasLanguageOfThePriests)
         ? 6
-        : getWizardLevels(hierophants[0]).lastIndexOf(1));
+        : getWizardLevels(hierophants[0]).lastIndexOf(1);
 
     if (hierophantLevel < highestLichePriestLevel) {
       return [{
@@ -159,6 +168,21 @@ export const hierophantChecks = (list) => {
       return [];
     }
   }
+}
+
+export const generalIsHierophant = (list) => {
+  const errors = [];
+  const generals = getGenerals(list);
+  if (generals.length === 1) {
+    const isHierophant = generals[0].command.find((command) => command.active && command.name_en === "The Hierophant");
+    if (!isHierophant) {
+      errors.push({
+        message: "misc.error.hierophantGeneral",
+        section: "characters",
+      });
+    }
+  }
+  return errors;
 }
 
 export const generalIsWizard = (list) => {

@@ -127,6 +127,7 @@
   "misc.error.noHierophant": "Necesitas un Hierofante",
   "misc.error.multipleHierophants": "Solo se permite un Hierofante",
   "misc.error.hierophantLevel": "Tu Hierofante no tiene el nivel de hechicería más alto de tus Sacerdotes Funerarios",
+  "misc.error.hierophantGeneral": "Your general must also be the Hierophant",
   "misc.error.wizardGeneral": "Tu general debe tener niveles de Hechiceria",
   "pwa.button": "Instalar app",
   "pwa.prompt": "Old World Builder se puede instalar como una aplicación en su dispositivo. ¿Instalar ahora?",
