@@ -25,7 +25,7 @@
 }
 
 .print * {
-  color: #384043;
+  color: #384043 !important;
   border-color: #384043 !important;
 }
 
