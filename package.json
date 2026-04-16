@@ -58,6 +58,9 @@
     "deploy": "gh-pages -d build",
     "sentry:sourcemaps": "sentry-cli sourcemaps inject --org booky --project old-world-builder ./build && sentry-cli sourcemaps upload --org booky --project old-world-builder ./build"
   },
+  "resolutions": {
+    "vite": "^7.3.1"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
