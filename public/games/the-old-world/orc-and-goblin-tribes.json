@@ -3126,6 +3126,7 @@
           }
         },
         {
+          "id": "orc-mob-biguns",
           "name_en": "Big 'Uns",
           "name_cn": "大只佬",
           "name_de": "Moschas",
@@ -3137,6 +3138,9 @@
             "name_cn": "0-1per army",
             "name_de": "0-1 pro Armee",
             "name_fr": "0-1 par armée"
+          },
+          "restrictions": {
+            "max": 1
           }
         },
         {
