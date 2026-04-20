@@ -1,5 +1,5 @@
 import { useState, useEffect, Fragment } from "react";
-import { useParams, useLocation, Redirect } from "react-router-dom";
+import { useParams, useLocation, Link, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FormattedMessage, useIntl } from "react-intl";
 import PropTypes from "prop-types";
@@ -18,6 +18,7 @@ import { NumberInput } from "../../components/number-input";
 import { Icon } from "../../components/icon";
 import { Header, Main } from "../../components/page";
 import { Button } from "../../components/button";
+import { ErrorMessage } from "../../components/error-message";
 import { Stats } from "../../components/stats";
 import {
   RulesIndex,
@@ -43,6 +44,7 @@ import { getGameSystems, getCustomDatasetData } from "../../utils/game-systems";
 
 import "./Unit.css";
 import { updateSetting } from "../../state/settings";
+import { checkOptionRestrictions } from "../../utils/option-restrictions";
 
 export const Unit = ({ isMobile, previewData = {} }) => {
   const isPreview = Boolean(previewData?.type);
@@ -1116,12 +1118,25 @@ export const Unit = ({ isMobile, previewData = {} }) => {
                   options,
                   useCheckboxes,
                   alwaysActive,
+                  restrictions,
                   ...equipment
                 }) => {
                   const exclusiveUnitCheckedOption = unit.options.find(
                     (exclusiveOption) =>
                       exclusiveOption.exclusive && exclusiveOption.active,
                   );
+
+                  const restrictionError = active && restrictions
+                    ? checkOptionRestrictions(unit.id, {id, restrictions}, list, "options")
+                    : undefined;
+                  const usedElsewhereBy = restrictionError?.otherUnits?.map((otherUnit, index) => (
+                    <Fragment key={`${otherUnit.unit.id}-error-link`}>
+                      <Link to={otherUnit.url}>
+                        {getUnitName({ unit: otherUnit.unit, language })}
+                      </Link>
+                      {index !== restrictionError.otherUnits.length - 1 ? ", " : ""}
+                    </Fragment>
+                  ));
 
                   if (!stackable) {
                     const isDisabled =
@@ -1160,6 +1175,22 @@ export const Unit = ({ isMobile, previewData = {} }) => {
                           language,
                           disabled: isDisabled,
                         })}
+                        {restrictionError &&
+                          <ErrorMessage
+                            key={`${id}-restrictederror`}
+                            spaceAfter
+                            spaceBefore={isMobile}
+                          >
+                            <span>
+                              <FormattedMessage
+                                id={restrictionError.message}
+                                values={{
+                                  usedby: usedElsewhereBy,
+                                }}
+                              />
+                            </span>
+                          </ErrorMessage>
+                        }
                         {options?.length > 0 && active && (
                           <>
                             {options

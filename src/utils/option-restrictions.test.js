@@ -2,6 +2,7 @@ import { describe, expect, test } from "vitest";
 import { checkOptionRestrictions } from "./option-restrictions";
 
 const baseList = {
+  id: "test-army",
   armyComposition: "unknown-composition",
   points: 2000,
   characters: [],
@@ -15,8 +16,6 @@ const baseList = {
   mercenaries: [],
   allies: [],
 };
-
-const getMessages = (errors) => errors.map((error) => error.message);
 
 describe("checkOptionRestrictions", () => {
   test("adds maxOptionPerArmy when two units have a max 1 option", () => {
@@ -56,10 +55,8 @@ describe("checkOptionRestrictions", () => {
     }
 
     const errors = checkOptionRestrictions(orcMob1.id, orcMob1.options[0], list, "options");
-    expect(errors).toEqual({
-      message: "misc.error.maxOptionPerArmy",
-      otherUnits: ["orc-mob.2"],
-    });
+    expect(errors.message).toEqual("misc.error.maxOptionPerArmy");
+    expect(errors.otherUnits[0].url).toEqual("/editor/test-army/core/orc-mob.2/")
   });
 });
 
@@ -103,14 +100,12 @@ describe("checkOptionRestrictions", () => {
     }
 
     const errors1 = checkOptionRestrictions(orcMob1.id, orcMob1.options[0], list, "options");
-    expect(errors1).toEqual([]);
+    expect(errors1).toEqual(undefined);
 
     list.points = 1000;
 
     const errors2 = checkOptionRestrictions(orcMob1.id, orcMob1.options[0], list, "options");
-    expect(errors2).toEqual({
-      message: "misc.error.maxOptionPerArmy",
-      otherUnits: ["orc-mob.2"],
-    });
+    expect(errors2.message).toEqual("misc.error.maxOptionPerArmy");
+    expect(errors2.otherUnits[0].url).toEqual("/editor/test-army/core/orc-mob.2/")
   });
 });

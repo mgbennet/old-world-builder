@@ -27,22 +27,28 @@ export const checkOptionRestrictions = (unitId, option, list, optionType) => {
   }
   const type = optionType || "options";
 
-  const allUnits = [
-    ...(list.characters || []),
-    ...(list.core || []),
-    ...(list.special || []),
-    ...(list.rare || []),
-    ...(list.mercenaries || []),
+  const unitCategories = [
+    "characters",
+    "core",
+    "special",
+    "rare",
+    "mercenaries",
+    "allies",
   ];
   let count = 1;
   let otherUnits = [];
-  for (let targetUnit of allUnits) {
-    if (targetUnit.id !== unitId) {
-      if (targetUnit[type]) {
-        for (let targetOption of targetUnit[type]) {
-          if (targetOption.id === option.id && targetOption.active) {
-            count += 1;
-            otherUnits.push(targetUnit.id);
+  for (let targetCategory of unitCategories) {
+    for (let targetUnit of list[targetCategory]) {
+      if (targetUnit.id !== unitId) {
+        if (targetUnit[type]) {
+          for (let targetOption of targetUnit[type]) {
+            if (targetOption.id === option.id && targetOption.active) {
+              count += 1;
+              otherUnits.push({
+                url: `/editor/${list.id}/${targetCategory}/${targetUnit.id}/`,
+                unit: targetUnit,
+              });
+            }
           }
         }
       }
@@ -57,6 +63,6 @@ export const checkOptionRestrictions = (unitId, option, list, optionType) => {
       otherUnits
     }
   } else {
-    return [];
+    return undefined;
   }
 }
