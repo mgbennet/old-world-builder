@@ -576,7 +576,7 @@ export const GameView = () => {
           spaceTop
           onClick={() => updateVictoryPoints({ unit, value: "25" })}
         >
-          {"<25%"}
+          {"≤25%"}
         </Button>
         {unit.detachments &&
           !unit.ignoreNoDetachment &&
