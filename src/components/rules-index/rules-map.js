@@ -121,6 +121,7 @@ export const synonyms = {
   "the daemon": "suffer not...",
   "spear of kurnous": "the spear of kurnous",
   warbows: "warbow",
+  "ritual blades": "ritual blade",
   greatbows: "greatbow",
   "chracian great blades": "chracian great blade",
   "swords of hoeth": "sword of hoeth",
