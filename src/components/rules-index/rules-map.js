@@ -326,6 +326,7 @@ export const synonyms = {
   "chaos furies of khorne": "chaos furies",
   shadowlands: "lore of the shadowlands",
   "celestial dragon guard": "supreme matriarch of nan-gau",
+  "long spears": "long spear",
 };
 
 export const rulesMap = {

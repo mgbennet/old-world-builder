@@ -19,7 +19,6 @@ import { getUnitPoints, getPoints, getAllPoints } from "../../utils/points";
 import { useLanguage } from "../../utils/useLanguage";
 import { validateList } from "../../utils/validation";
 import { removeFromLocalList } from "../../utils/list";
-import { getGameSystems } from "../../utils/game-systems";
 import { deleteList, moveUnit } from "../../state/lists";
 import { setErrors } from "../../state/errors";
 
@@ -38,8 +37,6 @@ export const Editor = ({ isMobile }) => {
   const list = useSelector((state) =>
     state.lists.find(({ id }) => listId === id),
   );
-  const gameSystems = getGameSystems();
-  const game = gameSystems.find((game) => game.id === list?.game);
 
   const handleCancel = (event) => {
     event.preventDefault();
