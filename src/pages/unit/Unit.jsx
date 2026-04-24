@@ -597,18 +597,17 @@ export const Unit = ({ isMobile, previewData = {} }) => {
       callback: () => handleRemove(unit.id),
     },
   ];
-  const notes =
-    unit?.armyComposition?.[list?.armyComposition || list?.army]?.notes ||
-    unit.notes;
-  const lores =
-    unit?.armyComposition?.[list?.armyComposition || list?.army]?.lores ||
-    unit.lores;
+
   const specialRules =
     unit?.armyComposition?.[list?.armyComposition || list?.army]
       ?.specialRules || unit.specialRules;
   const listArmyComposition = list?.armyComposition || list?.army;
   const unitArmyComposition = unit.army ? unit.army : listArmyComposition;
   const stats = unit.profile?.stats || getStats(unit, unitArmyComposition);
+  const notes =
+    unit?.armyComposition?.[unitArmyComposition]?.notes || unit.notes;
+  const lores =
+    unit?.armyComposition?.[unitArmyComposition]?.lores || unit.lores;
 
   return (
     <>

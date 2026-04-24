@@ -459,7 +459,7 @@ export const rules = {
         },
         {
           ids: ["black-orc-warboss", "black-orc-bigboss"],
-          requires: ["black-orc-mob"],
+          requires: ["black-orc-mob", "black-orc-mob-core"],
           requiresType: "all",
           perUnit: true,
           min: 0,
